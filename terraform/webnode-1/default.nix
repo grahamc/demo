@@ -1,4 +1,4 @@
     { imports = [ ./hardware-configuration.nix ./terraform.nix ];
-      deployment.targetHost = "195.201.30.190";
+      deployment.targetHost = "195.201.30.188";
     }
   

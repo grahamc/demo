@@ -1,13 +1,19 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib) mkIf mkOption types;
-  cfg = config.roles.webnode;
+  cfg = config.terraform;
+
+  isRole = role: builtins.elem role cfg.roles.enabled;
 in {
   options = {
-    roles.webnode = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
+    terraform = {
+      roles.enabled = mkOption {
+        type = types.listOf types.string;
+        default = [];
+      };
+
+      name = mkOption {
+        type = types.string;
       };
 
       idx = mkOption {
@@ -16,7 +22,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable rec {
+  config = mkIf (isRole "webnode") rec {
     services.nginx.enable = true;
     services.nginx.virtualHosts.default.root = ./webroot;
   };

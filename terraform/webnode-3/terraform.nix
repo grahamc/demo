@@ -1,5 +1,5 @@
-    {
-      roles.webnode.enable = true;
-      roles.webnode.idx = 3;
+    { terraform.roles.enabled = ["webnode"];
+      terraform.name = "webnode-3";
+      terraform.idx = 3;
     }
   
